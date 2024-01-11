@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const allowCors = require("allowCors");
 
 app.use(cors({
   origin: ["https://product-node-app.vercel.app"],
@@ -10,11 +9,8 @@ app.use(cors({
 }));
 
 app.use(cors());
-app.use(allowCors);
 
 app.options('*', cors());
-app.options('/deleteProduct/:productId', cors());
-app.options('/updateProduct/:productId', cors());
 
 
 app.use(express.json());
@@ -62,10 +58,6 @@ app.post("/addProducts", function (req, res) {
 
 app.delete("/deleteProduct/:productId", async function (req, res) {
   const productId = req.params.productId;
-
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   try {
     const deletedProduct = await productsTable.findByIdAndDelete(productId);
