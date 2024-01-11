@@ -1,10 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const allowCors = require("./path-to-allowCors-middleware");
-const allowCors = require('./node_modules/cors')
-
-let app = express();
+const allowCors = require("allowCors");
 
 app.use(cors({
   origin: ["https://product-node-app.vercel.app"],
