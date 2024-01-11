@@ -13,6 +13,9 @@ app.use(cors({
 app.use(cors());
 
 app.options('*', cors());
+app.options('/deleteProduct/:productId', cors());
+app.options('/updateProduct/:productId', cors());
+
 
 app.use(express.json());
 
