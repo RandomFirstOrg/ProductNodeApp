@@ -2,15 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-app.use(cors({
-  origin: ["https://product-node-app.vercel.app"],
-  methods: ["POST", "GET", "DELETE", "PUT"],
-  credentials: true
-}));
+// app.use(cors({
+//   origin: ["https://product-node-app.vercel.app"],
+//   methods: ["POST", "GET", "DELETE", "PUT"],
+//   credentials: true
+// }));
 
 app.use(cors());
 
-app.options('*', cors());
+// app.options('*', cors());
 
 
 app.use(express.json());
@@ -58,6 +58,7 @@ app.post("/addProducts", function (req, res) {
 
 app.delete("/deleteProduct/:productId", async function (req, res) {
   const productId = req.params.productId;
+
 
   try {
     const deletedProduct = await productsTable.findByIdAndDelete(productId);
