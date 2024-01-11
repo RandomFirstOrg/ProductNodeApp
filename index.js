@@ -63,6 +63,10 @@ app.post("/addProducts", function (req, res) {
 app.delete("/deleteProduct/:productId", async function (req, res) {
   const productId = req.params.productId;
 
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
   try {
     const deletedProduct = await productsTable.findByIdAndDelete(productId);
 
