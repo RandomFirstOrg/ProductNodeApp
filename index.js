@@ -4,8 +4,13 @@ const cors = require("cors");
 
 let app = express();
 
+app.use(cors({
+  origin: ["https://product-node-app.vercel.app"],
+  methods: ["POST", "GET", "DELETE", "PUT"],
+  credentials: true
+}));
+
 app.use(express.json());
-app.use(cors());
 
 mongoose.connect(
   "mongodb+srv://Product:Product@cluster0.a15bzyx.mongodb.net/?retryWrites=true&w=majority"
