@@ -2,18 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// app.use(cors({
-//   origin: ["https://product-node-app.vercel.app"],
-//   methods: ["POST", "GET", "DELETE", "PUT"],
-//   credentials: true
-// }));
-
-app.use(cors());
-
-// app.options('*', cors());
-
+let app = express();
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(
   "mongodb+srv://Product:Product@cluster0.a15bzyx.mongodb.net/?retryWrites=true&w=majority"
@@ -58,7 +50,6 @@ app.post("/addProducts", function (req, res) {
 
 app.delete("/deleteProduct/:productId", async function (req, res) {
   const productId = req.params.productId;
-
 
   try {
     const deletedProduct = await productsTable.findByIdAndDelete(productId);
@@ -111,9 +102,7 @@ app.put("/updateProduct/:productId", async function (req, res) {
   }
 });
 
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, (err) => {
+app.listen(3001, (err) => {
   if (err) {
     console.log("Server not running");
   } else {
