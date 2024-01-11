@@ -114,7 +114,9 @@ app.put("/updateProduct/:productId", async function (req, res) {
   }
 });
 
-app.listen(3001, (err) => {
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, (err) => {
   if (err) {
     console.log("Server not running");
   } else {
