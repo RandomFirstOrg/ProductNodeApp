@@ -1,13 +1,13 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express, { json } from "express";
+import { connect, model } from "mongoose";
+import cors from "cors";
 
 let app = express();
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
-mongoose.connect(
+connect(
   "mongodb+srv://Product:Product@cluster0.a15bzyx.mongodb.net/?retryWrites=true&w=majority"
 )
   .then(() => {
@@ -17,7 +17,7 @@ mongoose.connect(
     console.log(err);
   });
 
-let productsTable = mongoose.model("products", {
+let productsTable = model("products", {
   id: Number,
   title: String,
   description: String,
