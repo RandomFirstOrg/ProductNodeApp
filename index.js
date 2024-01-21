@@ -1,14 +1,14 @@
-import express, { json } from "express";
-import { connect, model } from "mongoose";
-import cors from "cors";
-
+let express = require("express");
+let mongoose = require("mongoose");
+const cors = require('cors');
 let app = express();
 
-app.use(json());
+app.use(express.json());
 app.use(cors());
 
-connect(
-  "mongodb+srv://Product:Product@cluster0.a15bzyx.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(
+  "mongodb+srv://Product:Product@cluster0.a15bzyx.mongodb.net/?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true }
 )
   .then(() => {
     console.log("DB Connected Successfully");
@@ -17,7 +17,7 @@ connect(
     console.log(err);
   });
 
-let productsTable = model("products", {
+let productsTable = mongoose.model("products", {
   id: Number,
   title: String,
   description: String,
@@ -29,6 +29,8 @@ let productsTable = model("products", {
   category: String,
   thumbnail: String,
 });
+
+
 
 app.get("/productsList", async function (req, res) {
   let products = await productsTable.find({});
@@ -79,7 +81,7 @@ app.put("/updateProduct/:productId", async function (req, res) {
   const productId = req.params.productId;
 
   try {
-    const updateProduct = await productsTable.findByIdAndUpdate(productId,req.body);
+    const updateProduct = await productsTable.findByIdAndUpdate(productId, req.body);
 
     if (updateProduct) {
       res.status(200).json({
